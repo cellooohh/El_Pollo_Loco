@@ -16,9 +16,12 @@ class MovableObject extends DrawbleObject {
   }
 
   isAboveGround() {
-    return this.y < 180;
+    if (this instanceof ThrowableObject) {
+      return true;
+    } else {
+      return this.y < 180;
+    }
   }
-
 
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -70,5 +73,4 @@ class MovableObject extends DrawbleObject {
   moveLeft() {
     this.x -= this.speed;
   }
-
 }
