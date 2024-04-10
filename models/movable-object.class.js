@@ -4,7 +4,12 @@ class MovableObject extends DrawbleObject {
   speedY = 0;
   acceleration = 2.5;
   energy = 100;
-  lastHit = 0;
+  offset = {
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  };
 
   applyGravity() {
     setInterval(() => {
@@ -30,23 +35,6 @@ class MovableObject extends DrawbleObject {
     this.currentImage++;
   }
 
-  isColliding(mo) {
-    return (
-      this.x + this.width > mo.x &&
-      this.y + this.height > mo.y &&
-      this.x < mo.x &&
-      this.y < mo.y + mo.height
-    );
-  }
-
-  //   isColliding (obj) {
-  //     return  (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
-  //             (this.y + this.offsety + this.height) >= obj.y &&
-  //             (this.y + this.offsetY) <= (obj.y + obj.height) &&
-  //             obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
-
-  // }
-
   hit() {
     this.energy -= 5;
     if (this.energy < 0) {
@@ -55,6 +43,14 @@ class MovableObject extends DrawbleObject {
       this.lastHit = new Date().getTime();
     }
   }
+
+  isColliding(obj) {
+    return (this.x + this.width - this.offset.right) >= obj.x + obj.offset.left &&
+           (this.x + this.offset.left) <= (obj.x + obj.width - obj.offset.right) &&
+           (this.y + this.height - this.offset.bottom) >= obj.y + obj.offset.top &&
+           (this.y + this.offset.top) <= (obj.y + obj.height - obj.offset.bottom);
+}
+
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;

@@ -2,6 +2,14 @@ class Character extends MovableObject {
   height = 235;
   y = 80;
   speed = 10;
+
+  offset = {
+    top: -80,
+    bottom: -10,
+    left: -10,
+    right: -10
+  };
+
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
     "img/2_character_pepe/2_walk/W-22.png",
@@ -77,6 +85,8 @@ class Character extends MovableObject {
     setInterval(() => {
       if(this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
+        stopGame();
+        intervalIds.push(interval);
       } else if (this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT);
       } else if (this.isAboveGround()) {

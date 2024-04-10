@@ -9,6 +9,8 @@ class World {
   statusBarCoin = new StatusBarCoin();
   statusBarBottle = new StatusBarBottle();
   throwableObjects = [];
+  intervalIds = [];
+  lastHit = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -31,19 +33,13 @@ class World {
   }
 
   checkThrowObjects() {
-    if(this.keyboard.D) {
-      let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+    if (this.keyboard.D) {
+      let bottle = new ThrowableObject(
+        this.character.x + 100,
+        this.character.y + 100
+      );
       this.throwableObjects.push(bottle);
     }
-  }
-
-  checkCollisision() {
-    this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
-      }
-    });
   }
 
   draw() {
@@ -84,6 +80,7 @@ class World {
     }
     mo.draw(this.ctx);
     mo.drawFrame(this.ctx);
+    mo.drawFrameOffset(this.ctx);
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);
@@ -101,4 +98,25 @@ class World {
     mo.x = mo.x * -1;
     this.ctx.restore();
   }
+
+  checkCollisision() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hit();
+        this.statusBar.setPercentage(this.character.energy);
+      }
+    });
+  }
+
+  // setStoppableInverval(fn, time) {
+  //   let id = setInterval(fn, time);
+  //   this.intervalIds.push(id);
+  // }
+
+  // stopGame() {
+  //   this.intervalIds.forEach(clearInterval);
+  // }
+
+
+
 }

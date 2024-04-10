@@ -40,4 +40,21 @@ class DrawbleObject {
     }
   }
 
+  drawFrameOffset(ctx) {
+    if (this instanceof Character || this instanceof Chicken) {
+      let startX = this.x - this.offset.left;
+      let startY = this.y - this.offset.top;
+  
+      let totalWidth = this.width + this.offset.left + this.offset.right;
+      let totalHeight = this.height + this.offset.top + this.offset.bottom;
+  
+      ctx.beginPath();
+      ctx.lineWidth = "5";
+      ctx.strokeStyle = "red";
+      ctx.rect(startX, startY, totalWidth, totalHeight);
+      ctx.stroke();
+    }
+  }
+  
+
 }
