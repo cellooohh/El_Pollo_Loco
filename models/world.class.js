@@ -44,24 +44,19 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.ctx.translate(this.camara_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
-
     this.ctx.translate(-this.camara_x, 0);
     // --------Space for fixed objects --------
     this.addToMap(this.statusBar);
     this.addToMap(this.statusBarCoin);
     this.addToMap(this.statusBarBottle);
     this.ctx.translate(this.camara_x, 0);
-
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.throwableObjects);
-
     this.ctx.translate(-this.camara_x, 0);
-
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
