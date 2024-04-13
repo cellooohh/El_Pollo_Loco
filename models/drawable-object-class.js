@@ -29,7 +29,7 @@ class DrawbleObject {
   }
 
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Chicken) {
+    if (this instanceof Character || this instanceof Chicken || this instanceof Bottles) {
       ctx.beginPath();
       ctx.lineWidth = "5";
       ctx.strokeStyle = "blue";
@@ -39,7 +39,7 @@ class DrawbleObject {
   }
 
   drawFrameOffset(ctx) {
-    if (this instanceof Character || this instanceof Chicken) {
+    if (this instanceof Character || this instanceof Chicken || this instanceof Bottles) {
       let startX = this.x - this.offset.left;
       let startY = this.y - this.offset.top;
 

@@ -56,6 +56,7 @@ class World {
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.throwableObjects);
+    this.addObjectsToMap(this.level.bottles);
     this.ctx.translate(-this.camara_x, 0);
     let self = this;
     requestAnimationFrame(function () {
