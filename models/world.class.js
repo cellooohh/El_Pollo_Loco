@@ -11,6 +11,7 @@ class World {
   throwableObjects = [];
   intervalIds = [];
   lastHit = 0;
+  bottlecount = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
