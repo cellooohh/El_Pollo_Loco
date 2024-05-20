@@ -9,7 +9,7 @@ body {
     justify-content: center;
     flex-direction: column;
     height: 100vh;
-    background-image: url('img/game_background/background.png');
+    background-image: url('img/5_background/desert.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
