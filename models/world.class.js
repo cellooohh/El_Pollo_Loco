@@ -13,6 +13,8 @@ class World {
   lastHit = 0;
   bottlecount = 0;
 
+  backgroundSound = new Audio('audio/main-theme.mp3');
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -26,10 +28,20 @@ class World {
     this.character.world = this;
   }
 
+  playBackgroundMusik(){
+    if (audio) {
+      this.backgroundSound.play();
+      this.backgroundSound.volume = 0.1;
+    } else if (!audio){
+      this.backgroundSound.pause();
+    }
+  }
+
   run() {
     setInterval(() => {
       this.checkCollisision();
       this.checkThrowObjects();
+      this.playBackgroundMusik();
     }, 200);
   }
 
@@ -47,15 +59,15 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camara_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.clouds);
     this.ctx.translate(-this.camara_x, 0);
-    // --------Space for fixed objects --------
     this.addToMap(this.statusBar);
     this.addToMap(this.statusBarCoin);
     this.addToMap(this.statusBarBottle);
     this.ctx.translate(this.camara_x, 0);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.clouds);
+
     this.addObjectsToMap(this.throwableObjects);
     this.addObjectsToMap(this.level.bottles);
     this.ctx.translate(-this.camara_x, 0);

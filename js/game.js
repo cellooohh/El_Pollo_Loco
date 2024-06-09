@@ -1,12 +1,20 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let audio = true;
 
-function init(){
+// function init(){
+//     canvas = document.getElementById('canvas');
+//     world = new World(canvas, keyboard);
+// }
+
+function start(){
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    startpage = document.getElementById("startScreen");
 
-    console.log('My Character is', world.character);
+    canvas.classList.remove("d-none");
+    startpage.classList.add("d-none");
 }
 
 window.addEventListener("keydown", (e) => {
@@ -60,3 +68,19 @@ window.addEventListener("keyup", (e) => {
         keyboard.D = false;
     }
 });
+
+
+
+function toggleAudio(event) {
+    const audioimg = document.getElementById("mainMenuMusic");
+    if (event.type === "touchstart" || event.type === "click") {
+        if (!audio) {
+            audioimg.src = "img/icons/music-active.svg";
+            audio = true;
+        } else {
+            audioimg.src = "img/icons/music-muted.svg";
+            audio = false;
+        }
+    }
+}
+

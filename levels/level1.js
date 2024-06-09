@@ -9,7 +9,12 @@ const level1 = new Level(
     ],
 
     [
-        new Cloud() 
+        new Cloud(305),
+        new Cloud(530), 
+        new Cloud(1305), 
+        new Cloud(1430), 
+        new Cloud(1650), 
+        new Cloud(1855), 
     ],
 
     [
